@@ -3,29 +3,13 @@
   资料搜索 BizFind · 企业业务检索引擎
   本地访问   http://127.0.0.1:5180
   检索后端   Solr · http://127.0.0.1:8983/solr/wxmang_demo
-  版本       1.0.0 (634b207)
+  版本       1.0.0 (5b75d8c)
   索引数据   20 篇示例文档
 
 [api] GET /api/health → 200 (8ms)
 [api] GET /api/version → 200 (2ms)
 [api] GET /api/health → 200 (1ms)
 [api] GET /api/health → 200 (1ms)
-[api] GET /api/version → 200 (3ms)
-[api] GET /api/health → 200 (1ms)
-[api] GET /api/stats → 304 (143ms)
-[api] GET /api/health → 200 (3ms)
-[api] GET /api/stats → 304 (19ms)
-[api] GET /api/topics/categories → 200 (29ms)
-[api] GET /api/topics/search?q=&page=1&pageSize=12 → 200 (335ms)
-[api] GET /api/topics/traces → 200 (3ms)
-[api] GET /api/notes/search?q=&limit=100 → 200 (32ms)
-[api] GET /api/notes/questions?status=open&limit=50 → 200 (2ms)
-[api] GET /api/health → 200 (1ms)
-[api] GET /api/notes/search?q=&limit=100 → 200 (10ms)
-[api] GET /api/notes/questions?status=open&limit=50 → 200 (3ms)
-[api] GET /api/health → 200 (1ms)
-[api] GET /api/health → 200 (1ms)
-[api] GET /api/stats → 304 (17ms)
-[api] GET /api/suggest?q=&limit=7&core=wxmang_demo → 200 (2ms)
-[api] GET /api/search?q=%E6%98%93%E7%BB%8F&page=1&pageSize=10&sort=relevance&core=wxmang_demo → 200 (440ms)
-[api] GET /api/notes/traces?ids=163111%2C3339465%2C3254330%2C138332%2C2993%2C2973%2C18742%2C18431%2C3258967%2C140322 → 401 (3ms)
+[api] POST /api/notes/x → 401 (4ms)
+[api] GET /api/version → 200 (4ms)
+[api] GET /api/search?q=%E7%AE%A1%E7%90%86&pageSize=1 → 200 (604ms)

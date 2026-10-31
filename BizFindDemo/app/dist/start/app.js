@@ -18,6 +18,31 @@ export async function createApp() {
         res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; connect-src 'self'");
         next();
     });
+    // 改状态的请求要求来源与本站一致。没有 Origin（curl / 脚本）时放行，
+    // 本机调试不受影响；浏览器从别的站点提交会被挡住。
+    app.use((req, res, next) => {
+        if (req.method === 'GET' || req.method === 'HEAD' || req.method === 'OPTIONS') {
+            next();
+            return;
+        }
+        const origin = req.get('origin');
+        if (!origin) {
+            next();
+            return;
+        }
+        let originHost = '';
+        try {
+            originHost = new URL(origin).host;
+        }
+        catch {
+            originHost = '';
+        }
+        if (originHost && originHost === (req.get('host') ?? '')) {
+            next();
+            return;
+        }
+        res.status(403).json({ error: '请求来源不受信任', status: 403 });
+    });
     app.use(express.json({ limit: '64kb' }));
     app.use(express.urlencoded({ extended: false, limit: '16kb' }));
     app.use(auth.sessionMiddleware);
@@ -71,6 +96,10 @@ export async function createApp() {
         const returnTo = req.originalUrl.startsWith('/') ? req.originalUrl : '/';
         res.redirect(`/auth/login?returnTo=${encodeURIComponent(returnTo)}`);
     };
+    // 采集页与 /admin/site.html 同权限，不能匿名打开
+    app.get('/ingest-site.html', requireAdminPage, (_req, res) => {
+        res.sendFile(join(config.webDir, 'ingest-site.html'));
+    });
     app.get('/admin/site.html', requireAdminPage, (_req, res) => {
         res.sendFile(join(config.webDir, 'ingest-site.html'));
     });
