@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataConfig>
+
+  <dataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://192.168.1.11:1433;DatabaseName=wxmang" user="sa" password="123456"  batchSize="100"/>
+  <document> 
+    <entity name="articleTotal" query=" select  articleId,parentId,userName,title,content,writeTime,stat,tagName
+                                        from  dbo.articleTotal; "> 
+ 
+	  <field column="articleId" name="id"/>
+      <field column="parentId" name="parentId"/>
+	  <field column="userName" name="userName"/>
+      <field column="title" name="title"/>
+      <field column="conten" name="conten"/>
+      <field column="writeTime" name="writeTime"/>
+      <field column="stat" name="stat"/>
+	  <field column="tagName" name="tagName"/>
+	
+    </entity>
+  </document>
+</dataConfig>
